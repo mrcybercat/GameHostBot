@@ -18,3 +18,6 @@ REAME is still in development.
 - *Mykhailo Zub*
   - **GitHub** : myzub
   - **Role** : Developer
+- *Marko Korovin*
+  - **GitHub** : markondopolo
+  - **Role** : Developer
