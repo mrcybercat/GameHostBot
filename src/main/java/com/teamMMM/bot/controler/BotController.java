@@ -1,8 +1,10 @@
-package com.teamMMM.bot;
+package com.teamMMM.bot.controler;
 
-import com.teamMMM.events.StartEvent;
+import com.teamMMM.bot.events.StartEvent;
+import com.teamMMM.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -22,22 +24,23 @@ public class BotController {
     public JDA load() throws LoginException {
         // todo: everything
         System.out.println("Do thing please");
-        //JDA jda = JDABuilder.createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko")
-                //.enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
-        //        .build();
-        JDA jda = JDABuilder.createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko").build();
-        jda.addEventListener(new StartEvent());
 
+        JDA jda = JDABuilder
+                .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko")
+                .enableIntents(GatewayIntent.GUILD_MESSAGES)
+                .enableIntents(GatewayIntent.DIRECT_MESSAGES)
+                .addEventListeners(new StartEvent())
+                .build();
+
+        jda.addEventListener(new StatusEvent());
         return jda;
     }
-
-
-
 }
-
-
 
 //CommandClient cmdListener = new CommandClientBuilder().setPrefix(prefix).setOwnerId(Long.toString(owner))
 //        .addSlashCommands(playCmd, stopCmd, pauseCmd, resumeCmd, skipCmd, nowPlayingCmd, joinCmd).build();
 //.setActivity(listening("type /join")).build();
 //jda.addEventListener(cmdListener, eventWaiter());
+//JDA jda = JDABuilder.createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko")
+//.enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
+//        .build();
