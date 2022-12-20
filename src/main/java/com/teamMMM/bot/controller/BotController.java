@@ -1,4 +1,4 @@
-package com.teamMMM.bot.controler;
+package com.teamMMM.bot.controller;
 
 import com.teamMMM.bot.events.StartEvent;
 import com.teamMMM.bot.events.StatusEvent;
@@ -26,7 +26,7 @@ public class BotController {
         System.out.println("Do thing please");
 
         JDA jda = JDABuilder
-                .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko")
+                .createDefault(token)
                 .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new StartEvent())
