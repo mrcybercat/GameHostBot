@@ -17,7 +17,7 @@ REAME is still in development.
   - **Role** : Undefined
 - *Mykhailo Zub*
   - **GitHub** : myzub
-  - **Role** : Developer
+  - **Role** : Developer, Project Manager, DevOps
 - *Marko Korovin*
   - **GitHub** : markondopolo
   - **Role** : Developer
