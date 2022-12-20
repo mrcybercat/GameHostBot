@@ -1,14 +1,15 @@
 package com.teamMMM.bot;
 
+import com.teamMMM.events.StartEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.LoginException;
 
-@Configuration
+@Service
 public class BotController {
 
     @Value("${bot.token}")
@@ -20,9 +21,12 @@ public class BotController {
     @Bean
     public JDA load() throws LoginException {
         // todo: everything
-
-        JDA jda = JDABuilder.createDefault(token).build();
-        //jda.addEventListener(startEvent);
+        System.out.println("Do thing please");
+        //JDA jda = JDABuilder.createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko")
+                //.enableIntents(GatewayIntent.MESSAGE_CONTENT) // enables explicit access to message.getContentDisplay()
+        //        .build();
+        JDA jda = JDABuilder.createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GHeuq-.uAUMxgMQ_9X1c1giAjKaQj6KM-3ui-ddD4E-ko").build();
+        jda.addEventListener(new StartEvent());
 
         return jda;
     }

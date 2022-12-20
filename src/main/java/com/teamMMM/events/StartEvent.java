@@ -11,7 +11,7 @@ import java.awt.*;
 public class StartEvent extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getMessage().getContentRaw().startsWith("?")) {
+        //if (event.getMessage().getContentRaw().startsWith("?")) {
             EmbedBuilder builder = new EmbedBuilder();
             builder.setAuthor(event.getMember().getUser().getAsTag() + " (" + event.getMember().getId() + ")", null,
                     event.getMember().getUser().getAvatarUrl());
@@ -20,6 +20,6 @@ public class StartEvent extends ListenerAdapter {
             builder.setColor(new Color(72, 238, 27, 104));
             builder.setTimestamp(event.getMessage().getTimeCreated());
             event.getChannel().sendMessageEmbeds(builder.build()).queue();
-        }
+        //}
     }
 }
