@@ -7,7 +7,6 @@ import com.teamMMM.bot.events.StartEvent;
 import com.teamMMM.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +29,6 @@ public class BotController {
 
         JDA jda = JDABuilder
                 .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GbeSDJ.7T6OlQRbbgtrq9SkWH_cazhEijt7BnjZ_WROX8")
-                //.enableIntents(GatewayIntent.ALL_INTENTS)
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES)
                 .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new StartEvent())
