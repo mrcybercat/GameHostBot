@@ -1,9 +1,13 @@
 package com.teamMMM.bot.controller;
 
+import com.teamMMM.bot.commands.EditGameSettingsCmd;
+import com.teamMMM.bot.commands.JoinGameCmd;
+import com.teamMMM.bot.commands.StartGameCmd;
 import com.teamMMM.bot.events.StartEvent;
 import com.teamMMM.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +27,6 @@ public class BotController {
     @Bean
     public JDA load() throws LoginException {
         // todo: everything
-        System.out.println("Do thing please");
 
         JDA jda = JDABuilder
                 .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GbeSDJ.7T6OlQRbbgtrq9SkWH_cazhEijt7BnjZ_WROX8")
@@ -34,6 +37,7 @@ public class BotController {
                 .build();
 
         jda.addEventListener(new StatusEvent());
+        jda.addEventListener(new StartGameCmd(), new JoinGameCmd(), new EditGameSettingsCmd());
         return jda;
     }
 }
