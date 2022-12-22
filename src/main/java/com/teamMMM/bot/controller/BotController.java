@@ -26,9 +26,10 @@ public class BotController {
         System.out.println("Do thing please");
 
         JDA jda = JDABuilder
-                .createDefault(token)
-                .enableIntents(GatewayIntent.GUILD_MESSAGES)
+                .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GbeSDJ.7T6OlQRbbgtrq9SkWH_cazhEijt7BnjZ_WROX8")
+                //.enableIntents(GatewayIntent.ALL_INTENTS)
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES)
+                .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new StartEvent())
                 .build();
 

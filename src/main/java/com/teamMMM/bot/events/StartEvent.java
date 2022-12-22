@@ -12,7 +12,6 @@ import java.awt.*;
 import java.util.Objects;
 
 @Component
-
 public class StartEvent extends ListenerAdapter {
 
     @Override
