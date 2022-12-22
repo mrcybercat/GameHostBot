@@ -26,9 +26,8 @@ public class BotController {
     @Bean
     public JDA load() throws LoginException {
         // todo: everything
-
         JDA jda = JDABuilder
-                .createDefault("MTA1MTE2NTMwMTc3MDgxMzU1MA.GbeSDJ.7T6OlQRbbgtrq9SkWH_cazhEijt7BnjZ_WROX8")
+                .createDefault(token)
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES)
                 .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new StartEvent())
