@@ -1,4 +1,4 @@
-package com.teamMMM.bot;
+package com.team3m.bot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

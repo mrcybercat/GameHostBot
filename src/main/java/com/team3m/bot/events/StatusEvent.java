@@ -1,4 +1,4 @@
-package com.teamMMM.bot.events;
+package com.team3m.bot.events;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
