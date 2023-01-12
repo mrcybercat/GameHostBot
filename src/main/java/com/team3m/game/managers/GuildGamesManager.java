@@ -1,6 +1,6 @@
 package com.team3m.game.managers;
 
-import com.team3m.game.Lobby;
+import com.team3m.game.abstracts.Lobby;
 
 import java.util.ArrayList;
 import java.util.List;

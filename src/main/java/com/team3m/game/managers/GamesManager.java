@@ -1,7 +1,5 @@
 package com.team3m.game.managers;
 
-import com.team3m.game.Lobby;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

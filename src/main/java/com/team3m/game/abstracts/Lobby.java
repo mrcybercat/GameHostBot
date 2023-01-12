@@ -1,6 +1,4 @@
-package com.team3m.game;
-
-import net.dv8tion.jda.api.entities.User;
+package com.team3m.game.abstracts;
 
 import java.util.ArrayList;
 import java.util.List;

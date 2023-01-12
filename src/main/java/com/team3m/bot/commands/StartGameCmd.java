@@ -1,15 +1,14 @@
 package com.team3m.bot.commands;
 
-import com.team3m.bot.commands.interfaces.GameCmd;
+import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
 import com.team3m.bot.util.CommandEmbedBuilder;
-import com.team3m.game.Lobby;
+import com.team3m.game.abstracts.Lobby;
 import com.team3m.game.managers.GamesManager;
 import com.team3m.game.managers.GuildGamesManager;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -38,8 +37,6 @@ public class StartGameCmd extends GameCmd {
 
             if(ownerDuplicationCheck(guildManager.getLobbies(), event.getUser().getId()))
                 event.replyEmbeds(CommandEmbedBuilder.createPlaceholderEmbed(event, "Hey!", "You cant create multiple lobbies you sneaky", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
-
-            System.out.println("name " + event.getOption("name").getAsString());
 
             guildManager.getLobbies().add(new Lobby(event.getUser().getId(), event.getOption("name").getAsString()));
 

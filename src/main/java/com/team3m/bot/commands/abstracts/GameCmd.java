@@ -1,4 +1,4 @@
-package com.team3m.bot.commands.interfaces;
+package com.team3m.bot.commands.abstracts;
 
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

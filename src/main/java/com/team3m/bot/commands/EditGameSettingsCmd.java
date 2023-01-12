@@ -1,6 +1,6 @@
 package com.team3m.bot.commands;
 
-import com.team3m.bot.commands.interfaces.GameCmd;
+import com.team3m.bot.commands.abstracts.GameCmd;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 

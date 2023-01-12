@@ -1,11 +1,11 @@
 package com.team3m.bot.commands;
 
-import com.team3m.bot.commands.interfaces.GameCmd;
+import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
 import com.team3m.bot.util.CommandEmbedBuilder;
 import com.team3m.bot.util.EmojiHandler;
-import com.team3m.game.DefaultGame;
-import com.team3m.game.Lobby;
+import com.team3m.game.abstracts.DefaultGame;
+import com.team3m.game.abstracts.Lobby;
 import com.team3m.game.coup.CoupGame;
 import com.team3m.game.mafia.MafiaGame;
 import com.team3m.game.managers.GamesManager;
@@ -42,8 +42,6 @@ public class JoinGameCmd extends GameCmd {
                 event.replyEmbeds(CommandEmbedBuilder.createPlaceholderEmbed(event, "Ops...", "There are no lobbies to join sorry", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
                 return;
             }
-
-            System.out.println("Name" + guildManager.getLobbies().get(0).getLobbyName());
 
             List<SelectOption> lobbies = new ArrayList<>();
             for (int i = 0; i < guildManager.getLobbies().size(); i++) {
