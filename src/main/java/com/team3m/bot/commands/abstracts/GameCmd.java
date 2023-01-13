@@ -15,6 +15,14 @@ public abstract class GameCmd extends ListenerAdapter {
     protected String help = "no help available";
     protected List<OptionData> optionsData = new ArrayList<>();
 
+    public String getName() {
+        return name;
+    }
+
+    public String getHelp() {
+        return help;
+    }
+
     public void registerCommandData(@NotNull GuildReadyEvent event){
         if(optionsData != null){
             event.getGuild().upsertCommand(new CommandData(this.name, this.help)).addOptions(this.optionsData).queue();

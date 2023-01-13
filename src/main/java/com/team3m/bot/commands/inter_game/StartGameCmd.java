@@ -1,4 +1,4 @@
-package com.team3m.bot.commands.inter_lobby;
+package com.team3m.bot.commands.inter_game;
 
 import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
@@ -14,7 +14,7 @@ public class StartGameCmd extends GameCmd {
     public StartGameCmd()
     {
         this.name = "start";
-        this.help = "shows a random cat";
+        this.help = "Start the game if given the setup is complete";
     }
 
     @Override
@@ -34,6 +34,7 @@ public class StartGameCmd extends GameCmd {
             }
 
             lobby.getSettings().getGame().start();
+            lobby.setGameStarted(true);
             event.reply("Game stated!").setEphemeral(true).queue();
         }
     }

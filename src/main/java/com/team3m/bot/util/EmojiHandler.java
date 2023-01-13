@@ -9,8 +9,14 @@ public class EmojiHandler{
         MAFIA,
         COUP,
         DEFAULT_GAME,
+
         CONFIRM,
-        DISCARD
+        DISCARD,
+
+        FEW_PLAYERS,
+        ENOUGH_PLAYERS,
+        MANY_PLAYERS,
+        LOT_OF_PLAYERS
     }
 
     public static String getEmoji(EmojiEnum emojiEnum){
@@ -34,6 +40,22 @@ public class EmojiHandler{
 
             case DISCARD:
                 emoji = "U+274C";
+                break;
+
+            case FEW_PLAYERS:
+                emoji = "U+26FA";
+                break;
+
+            case ENOUGH_PLAYERS:
+                emoji = "U+1F3E0";
+                break;
+
+            case MANY_PLAYERS:
+                emoji = "U+1F3D8";
+                break;
+
+            case LOT_OF_PLAYERS:
+                emoji = "U+1F3D9";
                 break;
 
             default:

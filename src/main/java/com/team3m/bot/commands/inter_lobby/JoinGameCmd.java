@@ -1,4 +1,4 @@
-package com.team3m.bot.commands.inter_game;
+package com.team3m.bot.commands.inter_lobby;
 
 import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
@@ -26,7 +26,7 @@ public class JoinGameCmd extends GameCmd {
 
     public JoinGameCmd() {
         this.name = "join";
-        this.help = "shows a random cat";
+        this.help = "This command gives you a list of all lobbies in guild";
     }
 
     @Override
@@ -45,19 +45,7 @@ public class JoinGameCmd extends GameCmd {
                 return;
             }
 
-            List<SelectOption> lobbies = new ArrayList<>();
-            for (int i = 0; i < guildManager.getLobbies().size(); i++) {
-
-                lobbies.add(
-                    SelectOption.of(guildManager.getLobbies().get(i).getLobbyName(), "lobby_" + i) //  way to create a SelectOption
-                        .withDescription(
-                            getGameName(guildManager.getLobbies().get(i)) + " "
-                            +  guildManager.getLobbies().get(i).getPlayerIDs().size() + " / "
-                            +  guildManager.getLobbies().get(i).getSettings().getMaxPlayers()
-                        ) // this time with a description
-                        .withEmoji(Emoji.fromUnicode(getGameEmoji(guildManager.getLobbies().get(i)))) // and an emoji
-                );
-            }
+            List<SelectOption> lobbies = existingLobbiesToSelectOptions(guildManager.getLobbies());
 
             event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Lobbies", "Please choose lobby from the dropdown menu", ColorHandler.StatusColorEnum.SUCCESS))
                     .addActionRow(SelectionMenu.create("choose-lobby").addOptions(lobbies).build()).setEphemeral(true).queue();
@@ -67,22 +55,20 @@ public class JoinGameCmd extends GameCmd {
     @Override
     public void onSelectionMenu(SelectionMenuEvent event) {
         if (event.getComponentId().equals("choose-lobby")) {
-        //    event.getMessage().delete().queue();
             GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
             Lobby lobbySelected = guildManager.getLobbies().get(Integer.parseInt((event.getValues().get(0)).substring(6)));
 
             if(lobbySelected.getPlayerIDs().contains(event.getUser().getId())){
-                //event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Sorry pal...", "You can not join lobby twice", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
-                event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Sorry pal..\n You can not join lobby twice\nDo you want to leave previous lobby and join this one?", event.getValues().get(0) + " - " + lobbySelected.getLobbyName() , ColorHandler.StatusColorEnum.WARNING))
-                        .addActionRow(
-                               Button.success("join", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.CONFIRM))), // Button with only a label
-                                Button.secondary("cancel", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.DISCARD)))) // Button with only an emoji
-                        .setEphemeral(true).queue();
+                event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Sorry pal..\n" ,"You can not join lobby twice", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
                 return;    // Check if is  in this lobby
             }
 
-            if(guildManager.getdLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId()) != null){
-                event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Hey you!", "You must first leave other lobby before joining this one", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
+            if(guildManager.getLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId()) != null){
+                event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Hey you!\nYou must first leave other lobby before joining this one\nDo you want to leave previous lobby and join this one?", event.getValues().get(0) + " - " + lobbySelected.getLobbyName() , ColorHandler.StatusColorEnum.WARNING))
+                    .addActionRow(
+                        Button.success("join", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.CONFIRM))), // Button with only a label
+                        Button.secondary("cancel", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.DISCARD)))) // Button with only an emoji
+                    .setEphemeral(true).queue();
                 return; // Check if already in any other lobby bby
             }
 
@@ -91,14 +77,29 @@ public class JoinGameCmd extends GameCmd {
         }
     }
 
+    private List<SelectOption> existingLobbiesToSelectOptions(List<Lobby> lobbies){
+        List<SelectOption> lobbiesOptions = new ArrayList<>();
 
+        for (int i = 0; i < lobbies.size(); i++) {
+            lobbiesOptions.add(
+                SelectOption.of(lobbies.get(i).getLobbyName(), "lobby_" + i) //  way to create a SelectOption
+                    .withDescription(
+                        getGameName(lobbies.get(i)) + " "
+                        +  lobbies.get(i).getPlayerIDs().size() + " / "
+                        +  lobbies.get(i).getSettings().getMaxPlayers()) // this time with a description
+                    .withEmoji(Emoji.fromUnicode(getGameEmoji(lobbies.get(i)))) // and an emoji
+            );
+        }
+
+        return lobbiesOptions;
+    }
 
     @Override
     public void onButtonClick(ButtonClickEvent event) {
         if (event.getComponentId().equals("join")) {
             GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
-            Integer lobbyIndexToLeave = guildManager.getdLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId());
-            Lobby lobbySelectedToJoin = guildManager.getLobbies().get(Integer.parseInt((event.getMessage().getEmbeds().get(0).getFields().get(0).getValue().substring(6))));
+            Integer lobbyIndexToLeave = guildManager.getLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId());
+            Lobby lobbySelectedToJoin = guildManager.getLobbies().get(Integer.parseInt((event.getMessage().getEmbeds().get(0).getFields().get(0).getValue().substring(6).split(" ")[0])));
 
             if (lobbyIndexToLeave == null) {
                 event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Uhm", "You cant leave lobby you do not enter any", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
@@ -111,19 +112,16 @@ public class JoinGameCmd extends GameCmd {
             }
 
             guildManager.getLobbies().get(lobbyIndexToLeave).getPlayerIDs().remove(event.getUser().getId());
-            event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Left lobby " + guildManager.getLobbies().get(lobbyIndexToLeave).getLobbyName(), " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
-
             lobbySelectedToJoin.getPlayerIDs().add(event.getUser().getId());
-            event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Joined lobby " + lobbySelectedToJoin.getLobbyName(), " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue(); // send a message in the channel
+
+            event.replyEmbeds(
+                CommandEmbedBuilder.createCommandEmbed(event, "Left lobby " + guildManager.getLobbies().get(lobbyIndexToLeave).getLobbyName(), " ", ColorHandler.StatusColorEnum.SUCCESS),
+                CommandEmbedBuilder.createCommandEmbed(event, "Joined lobby " + lobbySelectedToJoin.getLobbyName(), " ", ColorHandler.StatusColorEnum.SUCCESS))
+            .setEphemeral(true).queue();
         } else if (event.getComponentId().equals("cancel")) {
             event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Got it staying in this lobby", " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue(); // send a message in the channel
-
-            //GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
-            //guildManager.removeByOwner(guildManager.getLobbies(), event.getUser().getId());
         }
     }
-
-
 
     private String getGameEmoji(Lobby lobby){
         if(lobby.getSettings().getGame() instanceof DefaultGame)
@@ -146,10 +144,11 @@ public class JoinGameCmd extends GameCmd {
 
         return "Not chosen";
     }
-
 }
 
 //event.reply("Connected to " + event.getValues().get(0)).setEphemeral(true).queue();
+//GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
+//guildManager.removeByOwner(guildManager.getLobbies(), event.getUser().getId());
 
 /*
 

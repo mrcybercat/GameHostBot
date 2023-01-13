@@ -1,4 +1,4 @@
-package com.team3m.bot.commands.inter_game;
+package com.team3m.bot.commands.inter_lobby;
 
 import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
@@ -22,7 +22,7 @@ public class CreateGameCmd extends GameCmd {
     public CreateGameCmd()
     {
         this.name = "create";
-        this.help = "shows a random cat";
+        this.help = "Creates a lobby for you and your friends";
 
         this.optionsData.add(
                 new OptionData(OptionType.STRING, "name", "Input lobby name of your choosing", true)
@@ -39,17 +39,17 @@ public class CreateGameCmd extends GameCmd {
                 return;
             }
 
-            if(ownerDuplicationCheck(guildManager.getLobbies(), event.getUser().getId())){
+            if(guildManager.ownerDuplicationCheck(guildManager.getLobbies(), event.getUser().getId())){
                 event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Hey!", "You cant create multiple lobbies you sneaky", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
                 return;
             }
             //guildManager.getLobbies().add(new Lobby(event.getUser().getId());
 
             event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Please confirm your chose\nLobby name",  event.getOption("name").getAsString(), ColorHandler.StatusColorEnum.SUCCESS))
-                    .addActionRow(
-                            Button.success("create", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.CONFIRM))), // Button with only a label
-                            Button.secondary("discard", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.DISCARD)))) // Button with only an emoji
-                    .setEphemeral(true).queue();
+                .addActionRow(
+                    Button.success("create", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.CONFIRM))), // Button with only a label
+                    Button.secondary("discard", Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.DISCARD)))) // Button with only an emoji
+                .setEphemeral(true).queue();
         }
     }
 
@@ -57,7 +57,7 @@ public class CreateGameCmd extends GameCmd {
     public void onButtonClick(ButtonClickEvent event) {
         if (event.getComponentId().equals("create")) {
             GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
-            if(ownerDuplicationCheck(guildManager.getLobbies(), event.getUser().getId())){
+            if(guildManager.ownerDuplicationCheck(guildManager.getLobbies(), event.getUser().getId())){
                 event.replyEmbeds(CommandEmbedBuilder.createCommandEmbed(event, "Hey!", "You cant create multiple lobbies you sneaky", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
                 return;
             }
@@ -69,17 +69,5 @@ public class CreateGameCmd extends GameCmd {
             //GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
             //guildManager.removeByOwner(guildManager.getLobbies(), event.getUser().getId());
         }
-    }
-
-    private boolean ownerDuplicationCheck(List<Lobby> lobbies, String ownerID) {
-        if(lobbies == null){
-            return false;
-        }
-        for (Lobby lobby: lobbies){
-            if(lobby.getOwnerID().equals(ownerID)){
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -1,4 +1,4 @@
-package com.team3m.bot.commands.inter_game;
+package com.team3m.bot.commands.inter_lobby;
 
 import com.team3m.bot.commands.abstracts.GameCmd;
 import com.team3m.bot.util.ColorHandler;
@@ -13,14 +13,14 @@ public class DeleteGameCmd extends GameCmd {
     public DeleteGameCmd()
     {
         this.name = "delete";
-        this.help = "shows a random cat";
+        this.help = "Deletes the lobby you owns";
     }
 
     @Override
     public void onSlashCommand(SlashCommandEvent event) {
         if (event.getName().equals("delete")) {
             GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
-            //Integer lobbyIndex = guildManager.getdLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId());
+            //Integer lobbyIndex = guildManager.getLobbyIndexByUserID(guildManager.getLobbies(), event.getUser().getId());
             Lobby lobbyToDelete = guildManager.findByOwner(guildManager.getLobbies(), event.getUser().getId());
 
             if (lobbyToDelete == null) {

@@ -45,7 +45,7 @@ public class GuildGamesManager {
         return null;
     }
 
-    public Integer getdLobbyIndexByUserID(List<Lobby> lobbies, String userID){
+    public Integer getLobbyIndexByUserID(List<Lobby> lobbies, String userID){
         for (int i = 0; i < lobbies.size(); i++) {
             if(lobbies.get(i).getPlayerIDs().contains(userID)){
                 return i;
@@ -54,4 +54,15 @@ public class GuildGamesManager {
         return null;
     }
 
+    public boolean ownerDuplicationCheck(List<Lobby> lobbies, String ownerID) {
+        if(lobbies == null){
+            return false;
+        }
+        for (Lobby lobby: lobbies){
+            if(lobby.getOwnerID().equals(ownerID)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
