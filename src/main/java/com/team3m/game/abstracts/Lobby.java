@@ -1,20 +1,22 @@
 package com.team3m.game.abstracts;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lobby {
 
 
   //  private Integer lobbyID;
-    private List<String> playerIDs = new ArrayList<>();
+    private Set<String> playerIDs = new HashSet<>();
     private String lobbyName;
     private String ownerID;
     private Settings settings = null;
 
     public Lobby(String ownerID, String lobbyName) {
         this.ownerID = ownerID;
-        this.playerIDs = new ArrayList<>();
+        this.playerIDs = new HashSet<>();
            this.playerIDs.add(this.ownerID);
         this.lobbyName = lobbyName;
         this.settings = new Settings();
@@ -36,11 +38,11 @@ public class Lobby {
         this.settings = settings;
     }
 
-    public List<String> getPlayerIDs() {
+    public Set<String> getPlayerIDs() {
         return playerIDs;
     }
 
-    public void setPlayerIDs(List<String> playerIDs) {
+    public void setPlayerIDs(Set<String> playerIDs) {
         this.playerIDs = playerIDs;
     }
 

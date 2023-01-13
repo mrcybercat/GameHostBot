@@ -1,9 +1,8 @@
 package com.team3m.bot.events;
 
 
-import com.team3m.bot.commands.EditGameSettingsCmd;
-import com.team3m.bot.commands.JoinGameCmd;
-import com.team3m.bot.commands.StartGameCmd;
+import com.team3m.bot.commands.inter_game.*;
+import com.team3m.bot.commands.inter_lobby.StartGameCmd;
 import com.team3m.game.managers.GamesManager;
 import com.team3m.game.managers.GuildGamesManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -29,11 +28,16 @@ public class StartEvent extends ListenerAdapter {
 
         //    event.getGuild().upsertCommand((new StartGameCmd()).registerCommandData()).queue();
 
-        (new StartGameCmd()).registerCommandData(event);
-        (new JoinGameCmd()).registerCommandData(event);
+        (new CreateGameCmd()).registerCommandData(event);
+        (new DeleteGameCmd()).registerCommandData(event);
         (new EditGameSettingsCmd()).registerCommandData(event);
+        (new JoinGameCmd()).registerCommandData(event);
+        (new LeaveGameCmd()).registerCommandData(event);
+        (new StartGameCmd()).registerCommandData(event);
 
-    //    event.getGuild().upsertCommand((new StartGameCmd()).registerCommandData()).queue();
+
+
+        //    event.getGuild().upsertCommand((new StartGameCmd()).registerCommandData()).queue();
     //    event.getGuild().upsertCommand((new StartGameCmd()).registerCommandData()).queue();
 
 

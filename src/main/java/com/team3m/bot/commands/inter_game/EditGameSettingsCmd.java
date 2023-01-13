@@ -1,4 +1,4 @@
-package com.team3m.bot.commands;
+package com.team3m.bot.commands.inter_game;
 
 import com.team3m.bot.commands.abstracts.GameCmd;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;

@@ -1,8 +1,7 @@
 package com.team3m.bot.controller;
 
-import com.team3m.bot.commands.EditGameSettingsCmd;
-import com.team3m.bot.commands.JoinGameCmd;
-import com.team3m.bot.commands.StartGameCmd;
+import com.team3m.bot.commands.inter_game.*;
+import com.team3m.bot.commands.inter_lobby.StartGameCmd;
 import com.team3m.bot.events.StartEvent;
 import com.team3m.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
@@ -37,7 +36,7 @@ public class BotController {
 
         jda.addEventListener(new StatusEvent());
 
-        jda.addEventListener(new StartGameCmd(), new JoinGameCmd(), new EditGameSettingsCmd());
+        jda.addEventListener(new CreateGameCmd(),new DeleteGameCmd(), new StartGameCmd(), new JoinGameCmd(), new LeaveGameCmd(), new EditGameSettingsCmd());
         return jda;
     }
 }
