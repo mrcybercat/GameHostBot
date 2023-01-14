@@ -10,7 +10,7 @@ public class ConformationButtonHandler {
             Button.success(confirmLabel, Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.CONFIRM))),
             Button.secondary(discardLabel, Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.DISCARD)))
         };
-
-
     }
+
+
 }

@@ -18,7 +18,7 @@ import javax.security.auth.login.LoginException;
 @Service
 public class BotController {
 
-    @Value("${bot.token}")
+    @Value("${bot.jda-token}")
     private String token;
 
     @Value("${bot.prefix}")

@@ -5,7 +5,6 @@ import com.team3m.bot.util.ColorHandler;
 import com.team3m.bot.util.CommandEmbedBuilder;
 import com.team3m.bot.util.EmojiHandler;
 import com.team3m.game.abstracts.Lobby;
-import com.team3m.game.mafia.MafiaGame;
 import com.team3m.game.managers.GamesManager;
 import com.team3m.game.managers.GuildGamesManager;
 import net.dv8tion.jda.api.entities.Emoji;

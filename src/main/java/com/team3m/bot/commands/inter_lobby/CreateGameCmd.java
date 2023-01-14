@@ -14,8 +14,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.Button;
 
-import java.util.List;
-
 public class CreateGameCmd extends GameCmd {
 
 
