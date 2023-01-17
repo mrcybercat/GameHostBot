@@ -1,5 +1,8 @@
 package com.teamMMM.bot.controller;
 
+import com.teamMMM.bot.commands.EditGameSettingsCmd;
+import com.teamMMM.bot.commands.JoinGameCmd;
+import com.teamMMM.bot.commands.StartGameCmd;
 import com.teamMMM.bot.events.StartEvent;
 import com.teamMMM.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
@@ -23,16 +26,15 @@ public class BotController {
     @Bean
     public JDA load() throws LoginException {
         // todo: everything
-        System.out.println("Do thing please");
-
         JDA jda = JDABuilder
                 .createDefault(token)
-                .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES)
+                .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new StartEvent())
                 .build();
 
         jda.addEventListener(new StatusEvent());
+        jda.addEventListener(new StartGameCmd(), new JoinGameCmd(), new EditGameSettingsCmd());
         return jda;
     }
 }
