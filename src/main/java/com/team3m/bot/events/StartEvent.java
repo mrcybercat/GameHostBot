@@ -1,6 +1,12 @@
-package com.teamMMM.bot.events;
+package com.team3m.bot.events;
 
 
+import com.team3m.bot.commands.inter_game.StartGameCmd;
+import com.team3m.bot.commands.inter_lobby.*;
+import com.team3m.bot.commands.inter_util.AboutCmd;
+import com.team3m.bot.commands.inter_util.StatusCmd;
+import com.team3m.game.managers.GamesManager;
+import com.team3m.game.managers.GuildGamesManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -10,7 +16,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Objects;
 
 @Component
@@ -19,9 +25,24 @@ public class StartEvent extends ListenerAdapter {
 
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
-        event.getGuild().upsertCommand("start", "this is a start command").queue();
-        event.getGuild().upsertCommand("join", "this is a join command").queue();
-        event.getGuild().upsertCommand("edit", "this is a edit command").queue();
+        GamesManager gamesManager = GamesManager.getInstance();
+        gamesManager.getGuildManagers().add(new GuildGamesManager(event.getGuild().getId()));
+
+//        List<Command> commands = event.getGuild().retrieveCommands().complete();
+//        for (Command command : commands) {
+//            event.getGuild().deleteCommandById(command.getId()).queue();
+//        }
+
+        (new CreateGameCmd()).registerCommandData(event);
+        (new DeleteGameCmd()).registerCommandData(event);
+        (new EditGameSettingsCmd()).registerCommandData(event);
+        (new JoinGameCmd()).registerCommandData(event);
+        (new LeaveGameCmd()).registerCommandData(event);
+
+        (new StartGameCmd()).registerCommandData(event);
+
+        (new StatusCmd()).registerCommandData(event);
+        (new AboutCmd()).registerCommandData(event);
     }
 
     @Override
