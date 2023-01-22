@@ -38,8 +38,8 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
             <scope>runtime</scope>
-        </dependency>
-        <!- Tests
+        </dependency> -->
+        <!-- Tests
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -60,6 +60,11 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>4.4.0_350</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
         </dependency>
         <dependency>
             <groupId>com.jagrosh</groupId>
