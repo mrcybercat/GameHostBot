@@ -1,21 +1,15 @@
-package com.team3m.bot.controller;
+package com.team3m.bot.configuration;
 
-import com.team3m.bot.commands.inter_game.StartGameCmd;
-import com.team3m.bot.commands.inter_lobby.*;
-import com.team3m.bot.commands.inter_util.AboutCmd;
-import com.team3m.bot.commands.inter_util.StatusCmd;
-import com.team3m.bot.events.StartEvent;
-import com.team3m.bot.events.StatusEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
 
 import javax.security.auth.login.LoginException;
 
-@Service
+@Configuration
 public class BotController {
 
     @Value("${bot.jda-token}")
@@ -35,13 +29,6 @@ public class BotController {
                 .enableIntents(GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new StartEvent())
                 .build();
-
-        jda.addEventListener(new StatusEvent());
-
-        jda.addEventListener(new CreateGameCmd(),new DeleteGameCmd(), new JoinGameCmd(), new LeaveGameCmd(), new EditGameSettingsCmd());
-        jda.addEventListener(new StartGameCmd());
-        jda.addEventListener(new StatusCmd(), new AboutCmd());
-
         return jda;
     }
 }

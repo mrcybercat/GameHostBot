@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.GenericInteractionCreateEvent;
 
-public class CommandEmbedBuilder {
+public class CommandEmbedHandler {
 
     public static MessageEmbed createCommandEmbed(GenericInteractionCreateEvent event, String name, String desc, ColorHandler.StatusColorEnum status) {
         EmbedBuilder builder = new EmbedBuilder();
