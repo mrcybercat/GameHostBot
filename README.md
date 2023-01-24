@@ -1,6 +1,6 @@
 # GameHostBot
-The discord com.team3m.bot.configuration is built on JDA.
-The com.team3m.bot.configuration can host party-games, such as Mafia, Coup, Secret Spy, Who Am I?.
+The discord bot is built on JDA.
+The bot can host party-games, such as Mafia, Coup, Secret Spy, Who Am I?.
 
 This project is a course work at the subject "Advanced Sofware Engineering" at AAU.
 
@@ -14,7 +14,7 @@ REAME is still in development.
 
 - *Mykyta Skipenko* 
   - **GitHub** : mrcybercat
-  - **Role** : Undefined
+  - **Role** : Developer Tester
 - *Mykhailo Zub*
   - **GitHub** : myzub
   - **Role** : Developer, Project Manager, DevOps
