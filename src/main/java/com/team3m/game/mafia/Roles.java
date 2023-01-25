@@ -1,17 +1,27 @@
 package com.team3m.game.mafia;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 public class Roles {
-    public HashMap<String, String> playerRoles = new HashMap<>();
+    private final HashMap<String, String> playerRoles = new HashMap<>();
 
-    protected void setPlayerRoles(Set<String> playerIDs, boolean clean) {
+    enum roles {
+        Civilian,
+        Mafia,
+        Commissar,
+        Doctor,
+        Prostitute
 
-        if (clean == true) {
-            playerRoles.clear();
-        }
+    }
+
+    public HashMap<String, String> getPlayerRoles() {
+        return playerRoles;
+    }
+
+    protected void setPlayerRoles(Set<String> playerIDs) {
 
         ArrayList<String> list = new ArrayList<>(playerIDs);
 
@@ -26,46 +36,41 @@ public class Roles {
 
         String[] setOfRoles = new String[number];
         ArrayList<String> special = new ArrayList<>();
-        special.add("Civilian");
-        special.add("Civilian");
-        special.add("Mafia");
-        special.add("Commissar");
-
-
-        if (number < 4) {
-        }
+        special.add(roles.Civilian.name());
+        special.add(roles.Civilian.name());
+        special.add(roles.Mafia.name());
+        special.add(roles.Commissar.name());
 
         if (number == 4) {
             randomAssignment(setOfRoles, special);
         }
 
-
         if (number == 5) {
-            special.add("Doctor");
+            special.add(roles.Doctor.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 6) {
-            special.add("Civilian");
-            special.add("Doctor");
+            special.add(roles.Civilian.name());
+            special.add(roles.Doctor.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 7) {
-            special.add("Civilian");
-            special.add("Mafia");
-            special.add("Doctor");
+            special.add(roles.Civilian.name());
+            special.add(roles.Mafia.name());
+            special.add(roles.Doctor.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 8) {
-            special.add("Civilian");
-            special.add("Mafia");
-            special.add("Doctor");
-            special.add("Prostitute");
+            special.add(roles.Civilian.name());
+            special.add(roles.Mafia.name());
+            special.add(roles.Doctor.name());
+            special.add(roles.Prostitute.name());
 
             randomAssignment(setOfRoles, special);
         }
@@ -80,7 +85,9 @@ public class Roles {
             double numDouble = 0;
 
             for (int i = 0; i < setOfRoles.length; i++) {
-                numDouble = Math.random() * special.size();
+                SecureRandom rand = new SecureRandom();
+
+                numDouble = rand.nextDouble(special.size());
                 randomNumberOfCell = (int) numDouble;
 
                 setOfRoles[i] = special.get(randomNumberOfCell);
