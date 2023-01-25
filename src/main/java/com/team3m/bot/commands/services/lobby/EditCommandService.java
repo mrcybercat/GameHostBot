@@ -23,37 +23,49 @@ public class EditCommandService {
 
     public void editLobby(SlashCommandEvent event) {
         GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
-        if(guildManager.findByOwner(guildManager.getLobbies(), event.getUser().getId()) == null){
+        if (guildManager.findByOwner(guildManager.getLobbies(), event.getUser().getId()) == null) {
             event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Nah-a", "You dont own a lobby yo edit", ColorHandler.StatusColorEnum.WARNING)).setEphemeral(true).queue();
             return; // Check if already in any other lobby bby
         }
 
         event.replyEmbeds(
-                    CommandEmbedHandler.createCommandEmbed(event, "Game", "Please choose game from the dropdown menu", ColorHandler.StatusColorEnum.SUCCESS),
-                    CommandEmbedHandler.createCommandEmbed(event, "Players", "Please choose player count from the dropdown menu", ColorHandler.StatusColorEnum.SUCCESS))
+                        CommandEmbedHandler.createCommandEmbed(event, "Game", "Please choose game from the dropdown menu", ColorHandler.StatusColorEnum.SUCCESS),
+                        CommandEmbedHandler.createCommandEmbed(event, "Players", "Please choose player count from the dropdown menu", ColorHandler.StatusColorEnum.SUCCESS))
                 .addActionRow(SelectionMenuHandler.createButton(new EditCommandController(), "game", gameOptions()))
                 .addActionRow(SelectionMenuHandler.createButton(new EditCommandController(), "playerCount", playerCountOptions()))
-            .setEphemeral(true).queue();
+                .setEphemeral(true).queue();
     }
+
 
     public void chooseLobbyToEdit(SelectionMenuEvent event) {
         String option = event.getComponentId().split("_")[2];
         Lobby lobbyToEdit = getLobbyToEdit(event) == null ? null : getLobbyToEdit(event);
 
-        switch (option){
+        switch (option) {
             case "confirm":
-                if(lobbyToEdit == null) return;
-                lobbyToEdit.getSettings().setGameByName(event.getValues().get(0));
-                event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName()  + "successfully edited " , " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
+                confirmChooseLobbyToEdit(event, lobbyToEdit);
 
             case "discard":
-                if(lobbyToEdit == null) return;
-                lobbyToEdit.getSettings().setMaxPlayers(Integer.valueOf(event.getValues().get(0).substring(8)));
-                event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName()  + "successfully edited " , " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
+                discardChooseLobbyToEdit(event, lobbyToEdit);
+
         }
     }
 
-    private Lobby getLobbyToEdit(SelectionMenuEvent event){
+    private void confirmChooseLobbyToEdit(SelectionMenuEvent event, Lobby lobbyToEdit) {
+        if (lobbyToEdit == null) return;
+        lobbyToEdit.getSettings().setGameByName(event.getValues().get(0));
+        event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName() + "successfully edited ", " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
+
+    }
+
+    private void discardChooseLobbyToEdit(SelectionMenuEvent event, Lobby lobbyToEdit) {
+        if (lobbyToEdit == null) return;
+        lobbyToEdit.getSettings().setMaxPlayers(Integer.valueOf(event.getValues().get(0).substring(8)));
+        event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName() + "successfully edited ", " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
+
+    }
+
+    private Lobby getLobbyToEdit(SelectionMenuEvent event) {
         GuildGamesManager guildManager = GamesManager.getInstance().getGuildManager(event.getGuild().getId());
         Lobby lobbyToEdit = guildManager.findByOwner(guildManager.getLobbies(), event.getUser().getId());
 
@@ -64,7 +76,7 @@ public class EditCommandService {
         return lobbyToEdit;
     }
 
-    private List<SelectOption> gameOptions(){
+    private List<SelectOption> gameOptions() {
         return List.of(
                 SelectOption.of("Mafia", "mafia") //  way to create a SelectOption
                         .withDescription("A classic mafia game") // this time with a description
@@ -74,7 +86,7 @@ public class EditCommandService {
                         .withEmoji(Emoji.fromUnicode(EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.COUP)))); // and an emoji
     }
 
-    private List<SelectOption> playerCountOptions(){
+    private List<SelectOption> playerCountOptions() {
         List<SelectOption> playerCountOptions = new ArrayList<>();
         for (int i = 3; i <= 10; i++) {
             playerCountOptions.add(
@@ -84,14 +96,14 @@ public class EditCommandService {
         return playerCountOptions;
     }
 
-    private String getPlayerEmoji(Integer playerCount){
-        if(playerCount >= 3 && playerCount <= 4)
+    private String getPlayerEmoji(Integer playerCount) {
+        if (playerCount >= 3 && playerCount <= 4)
             return EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.FEW_PLAYERS);
-        if(playerCount >= 5 && playerCount <= 6)
+        if (playerCount >= 5 && playerCount <= 6)
             return EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.ENOUGH_PLAYERS);
-        if(playerCount >= 7 && playerCount <= 8)
+        if (playerCount >= 7 && playerCount <= 8)
             return EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.MANY_PLAYERS);
-        if(playerCount >= 9 && playerCount <= 10)
+        if (playerCount >= 9 && playerCount <= 10)
             return EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.LOT_OF_PLAYERS);
 
         return EmojiHandler.getEmoji(EmojiHandler.EmojiEnum.FEW_PLAYERS);
