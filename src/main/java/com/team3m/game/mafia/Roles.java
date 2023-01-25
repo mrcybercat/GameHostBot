@@ -5,18 +5,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Roles {
-
-    /**
-     * This class stores the names of the roles and
-     *  assigns randomly all players to a role and stores this information
-     */
-
     public HashMap<String, String> playerRoles = new HashMap<>();
 
     protected void setPlayerRoles(Set<String> playerIDs, boolean clean) {
-        // method fills in an empty map with inputting id's and roles
 
-        if (clean = true) {
+        if (clean == true) {
             playerRoles.clear();
         }
 
@@ -39,28 +32,28 @@ public class Roles {
         special.add("Commissar");
 
 
-        if (number < 4) { // If the players <4 then throw out the message that the game does not make sense
+        if (number < 4) {
         }
 
-        if (number == 4) { // If there are 4 players, then 2 peaceful, 1 commissar and 1 mafia
+        if (number == 4) {
             randomAssignment(setOfRoles, special);
         }
 
 
-        if (number == 5) { // if there are 5 players, then 2 civilians, 1 commissar, 1 doctor and 1 mafia
+        if (number == 5) {
             special.add("Doctor");
 
             randomAssignment(setOfRoles, special);
         }
 
-        if (number == 6) { // if 6 players, then 3 peaceful, 1 commissar, 1 doctor and 1 mafia
+        if (number == 6) {
             special.add("Civilian");
             special.add("Doctor");
 
             randomAssignment(setOfRoles, special);
         }
 
-        if (number == 7) { // If there are 7 players, then 3 peaceful, 1 commissar, 1 doctor, and 2 mafia
+        if (number == 7) {
             special.add("Civilian");
             special.add("Mafia");
             special.add("Doctor");
@@ -68,7 +61,7 @@ public class Roles {
             randomAssignment(setOfRoles, special);
         }
 
-        if (number == 8) { // if 8 players, then 3 peaceful, 1 commissar, 1 doctor, 1 whore and 2 mafia
+        if (number == 8) {
             special.add("Civilian");
             special.add("Mafia");
             special.add("Doctor");

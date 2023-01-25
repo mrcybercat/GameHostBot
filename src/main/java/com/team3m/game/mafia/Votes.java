@@ -3,13 +3,6 @@ package com.team3m.game.mafia;
 import java.util.ArrayList;
 
 public class Votes {
-
-    /**
-     * This class stores the voting mechanisms
-     * A data structure was created that stores players' votes
-     */
-
-
     private final String voter_id;
     private String target_id;
 
