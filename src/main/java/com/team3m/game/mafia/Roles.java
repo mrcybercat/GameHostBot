@@ -9,11 +9,11 @@ public class Roles {
     private final HashMap<String, String> playerRoles = new HashMap<>();
 
     enum roles {
-        Civilian,
-        Mafia,
-        Commissar,
-        Doctor,
-        Prostitute
+        CIVILIAN,
+        MAFIA,
+        COMMISSAR,
+        DOCTOR,
+        PROSTITUTE
 
     }
 
@@ -36,41 +36,41 @@ public class Roles {
 
         String[] setOfRoles = new String[number];
         ArrayList<String> special = new ArrayList<>();
-        special.add(roles.Civilian.name());
-        special.add(roles.Civilian.name());
-        special.add(roles.Mafia.name());
-        special.add(roles.Commissar.name());
+        special.add(roles.CIVILIAN.name());
+        special.add(roles.CIVILIAN.name());
+        special.add(roles.MAFIA.name());
+        special.add(roles.COMMISSAR.name());
 
         if (number == 4) {
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 5) {
-            special.add(roles.Doctor.name());
+            special.add(roles.DOCTOR.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 6) {
-            special.add(roles.Civilian.name());
-            special.add(roles.Doctor.name());
+            special.add(roles.CIVILIAN.name());
+            special.add(roles.DOCTOR.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 7) {
-            special.add(roles.Civilian.name());
-            special.add(roles.Mafia.name());
-            special.add(roles.Doctor.name());
+            special.add(roles.CIVILIAN.name());
+            special.add(roles.MAFIA.name());
+            special.add(roles.DOCTOR.name());
 
             randomAssignment(setOfRoles, special);
         }
 
         if (number == 8) {
-            special.add(roles.Civilian.name());
-            special.add(roles.Mafia.name());
-            special.add(roles.Doctor.name());
-            special.add(roles.Prostitute.name());
+            special.add(roles.CIVILIAN.name());
+            special.add(roles.MAFIA.name());
+            special.add(roles.DOCTOR.name());
+            special.add(roles.PROSTITUTE.name());
 
             randomAssignment(setOfRoles, special);
         }
