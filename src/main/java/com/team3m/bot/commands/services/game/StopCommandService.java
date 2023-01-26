@@ -22,6 +22,6 @@ public class StopCommandService {
 
         lobby.getSettings().getGame().stop();
         lobby.setGameStarted(false);
-        event.reply("Game stated!").setEphemeral(true).queue();
+        event.reply("Game stopped!").setEphemeral(true).queue();
     }
 }

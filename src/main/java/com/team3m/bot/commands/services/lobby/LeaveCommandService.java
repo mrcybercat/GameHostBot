@@ -20,5 +20,9 @@ public class LeaveCommandService {
 
         guildManager.getLobbies().get(lobbyIndex).getPlayerIDs().remove(event.getUser().getId());
         event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Left lobby " + guildManager.getLobbies().get(lobbyIndex).getLobbyName(), " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
+
+        if(guildManager.getLobbies().get(lobbyIndex).getPlayerIDs().size() == 0){
+            guildManager.getLobbies().remove(guildManager.getLobbies().get(lobbyIndex).getPlayerIDs().size());
+        }
     }
 }

@@ -6,10 +6,7 @@ import com.team3m.bot.GameHostBotApp;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.junit.spring.integration.SpringIntegrationMethodRule;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -88,6 +85,11 @@ public class AcceptanceTests {
         acceptanceSteps.setUpDriver(targetUrl, webdriverPath);
         acceptanceSteps.logIn(agentEmail, agentPassword, agentIndex);
         acceptanceSteps.enterGuild(guild, agentIndex);
+    }
+
+    @After
+    public void tearDown(){
+        acceptanceSteps.tearDownDriver();
     }
 
 }

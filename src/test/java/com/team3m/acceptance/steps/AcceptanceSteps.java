@@ -80,4 +80,13 @@ public class AcceptanceSteps {
             }
         }
     }
+
+
+    @Step("Test agent closes site")
+    public void tearDownDriver() {
+        for (WebDriver driver: drivers) {
+            driver.close();
+        }
+    }
+
 }

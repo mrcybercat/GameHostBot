@@ -32,8 +32,8 @@ public class GuildGamesManager {
     }
 
 
-    public void removeByOwner(List<Lobby> lobbies, String ownerID){
-        lobbies.remove(findByOwner(lobbies, ownerID));
+    public boolean removeByOwner(List<Lobby> lobbies, String ownerID){
+        return lobbies.remove(findByOwner(lobbies, ownerID));
     }
 
     public Lobby findByOwner(List<Lobby> lobbies, String ownerID){

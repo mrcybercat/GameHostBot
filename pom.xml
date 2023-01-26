@@ -45,8 +45,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        </dependency>
-        <dependency>
+            <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
@@ -100,12 +99,13 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>4.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
         </dependency>
     </dependencies>
-
     <repositories>
         <repository>
             <id>dv8tion</id>
