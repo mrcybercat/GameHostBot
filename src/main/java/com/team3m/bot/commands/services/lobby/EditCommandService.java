@@ -42,23 +42,23 @@ public class EditCommandService {
         Lobby lobbyToEdit = getLobbyToEdit(event) == null ? null : getLobbyToEdit(event);
 
         switch (option) {
-            case "confirm":
-                confirmChooseLobbyToEdit(event, lobbyToEdit);
+            case "game":
+                editGameInLobby(event, lobbyToEdit);
 
-            case "discard":
-                discardChooseLobbyToEdit(event, lobbyToEdit);
+            case "playerCount":
+                editMaxPlayersInLobby(event, lobbyToEdit);
 
         }
     }
 
-    private void confirmChooseLobbyToEdit(SelectionMenuEvent event, Lobby lobbyToEdit) {
+    private void editGameInLobby(SelectionMenuEvent event, Lobby lobbyToEdit) {
         if (lobbyToEdit == null) return;
         lobbyToEdit.getSettings().setGameByName(event.getValues().get(0));
         event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName() + "successfully edited ", " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
 
     }
 
-    private void discardChooseLobbyToEdit(SelectionMenuEvent event, Lobby lobbyToEdit) {
+    private void editMaxPlayersInLobby(SelectionMenuEvent event, Lobby lobbyToEdit) {
         if (lobbyToEdit == null) return;
         lobbyToEdit.getSettings().setMaxPlayers(Integer.valueOf(event.getValues().get(0).substring(8)));
         event.replyEmbeds(CommandEmbedHandler.createCommandEmbed(event, "Lobby" + lobbyToEdit.getLobbyName() + "successfully edited ", " ", ColorHandler.StatusColorEnum.SUCCESS)).setEphemeral(true).queue();
