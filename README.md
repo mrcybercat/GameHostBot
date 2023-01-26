@@ -14,7 +14,7 @@ REAME is still in development.
 
 - *Mykyta Skipenko* 
   - **GitHub** : mrcybercat
-  - **Role** : Developer Tester
+  - **Role** : Developer, QA
 - *Mykhailo Zub*
   - **GitHub** : myzub
   - **Role** : Developer, Project Manager, DevOps
