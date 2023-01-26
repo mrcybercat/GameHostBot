@@ -1,10 +1,12 @@
-package com.team3m.bot.events;
+package com.team3m.bot.configuration;
 
 
-import com.team3m.bot.commands.inter_game.StartGameCmd;
-import com.team3m.bot.commands.inter_lobby.*;
-import com.team3m.bot.commands.inter_util.AboutCmd;
-import com.team3m.bot.commands.inter_util.StatusCmd;
+import com.team3m.bot.commands.abstracts.Command;
+import com.team3m.bot.commands.controllers.game.StartCommandController;
+import com.team3m.bot.commands.controllers.game.StopCommandController;
+import com.team3m.bot.commands.controllers.general.AboutCommandController;
+import com.team3m.bot.commands.controllers.general.StatusCommandController;
+import com.team3m.bot.commands.controllers.lobby.*;
 import com.team3m.game.managers.GamesManager;
 import com.team3m.game.managers.GuildGamesManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -12,7 +14,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ import java.awt.Color;
 import java.util.Objects;
 
 @Component
-public class StartEvent extends ListenerAdapter {
+public class StartEvent extends Command {
 
 
     @Override
@@ -33,16 +34,17 @@ public class StartEvent extends ListenerAdapter {
 //            event.getGuild().deleteCommandById(command.getId()).queue();
 //        }
 
-        (new CreateGameCmd()).registerCommandData(event);
-        (new DeleteGameCmd()).registerCommandData(event);
-        (new EditGameSettingsCmd()).registerCommandData(event);
-        (new JoinGameCmd()).registerCommandData(event);
-        (new LeaveGameCmd()).registerCommandData(event);
+        (new CreateCommandController()).registerCommandData(event);
+        (new DeleteCommandController()).registerCommandData(event);
+        (new EditCommandController()).registerCommandData(event);
+        (new JoinCommandController()).registerCommandData(event);
+        (new LeaveCommandController()).registerCommandData(event);
 
-        (new StartGameCmd()).registerCommandData(event);
+        (new StartCommandController()).registerCommandData(event);
+        (new StopCommandController()).registerCommandData(event);
 
-        (new StatusCmd()).registerCommandData(event);
-        (new AboutCmd()).registerCommandData(event);
+        (new StatusCommandController()).registerCommandData(event);
+        (new AboutCommandController()).registerCommandData(event);
     }
 
     @Override

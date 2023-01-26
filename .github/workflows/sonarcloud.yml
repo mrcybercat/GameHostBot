@@ -1,8 +1,6 @@
-name: Build
-on:
-  push:
-    branches:
-      - master # or the name of your main branch
+name: SonarCloud
+
+on: [push]
 
 jobs:
   build:
