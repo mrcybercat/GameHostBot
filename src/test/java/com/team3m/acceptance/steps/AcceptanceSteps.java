@@ -9,11 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AcceptanceSteps {
 
-    List<WebDriver> drivers;
+    List<WebDriver> drivers = new ArrayList<>();
     LoginPage loginPage;
     MainPage mainPage;
     TestGuildPage testGuildPage;
@@ -22,12 +23,9 @@ public class AcceptanceSteps {
     @Step("Test agent opens site")
     public void setUpDriver(String targetUrl, String webdriverPath) {
         WebDriver driver;
-
         System.setProperty("webdriver.chrome.driver", webdriverPath);
         driver = new ChromeDriver();
         driver.get(targetUrl);
-        loginPage = new LoginPage(driver);
-
         drivers.add(driver);
     }
 
